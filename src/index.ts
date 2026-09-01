@@ -4,7 +4,7 @@
  * This runs on the MERCHANT'S page. It holds nothing secret. Its whole job is to open
  * the Paywize-hosted checkout and tell the merchant what happened.
  *
- * The checkout itself is a page on checkout.paywize.in. Card and UPI details are typed
+ * The checkout itself is a page served by the gateway. Card and UPI details are typed
  * there, never on the merchant's page — the browser's same-origin policy means the
  * merchant's JavaScript physically cannot read those fields. That is what keeps
  * merchants out of PCI-DSS scope, and it is the reason this SDK is so small: all the
@@ -54,9 +54,11 @@ export interface LoadOptions {
   checkoutOrigin?: string;
 }
 
+// This test gateway is a single deployment, so both modes resolve to it. A real
+// gateway would have genuinely separate sandbox and production hosts.
 const ORIGINS: Record<Mode, string> = {
-  sandbox: 'https://sandbox-checkout.paywize.in',
-  production: 'https://checkout.paywize.in',
+  sandbox: 'https://payment-gateway-api-1juk.onrender.com',
+  production: 'https://payment-gateway-api-1juk.onrender.com',
 };
 
 const FRAME_STYLE =
