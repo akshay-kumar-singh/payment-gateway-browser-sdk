@@ -1,8 +1,8 @@
 /**
- * paywize-js — the Paywize web checkout SDK.
+ * payment-gateway-browser-sdk — the hosted web checkout SDK.
  *
  * This runs on the MERCHANT'S page. It holds nothing secret. Its whole job is to open
- * the Paywize-hosted checkout and tell the merchant what happened.
+ * the gateway-hosted checkout and tell the merchant what happened.
  *
  * The checkout itself is a page served by the gateway. Card and UPI details are typed
  * there, never on the merchant's page — the browser's same-origin policy means the
@@ -67,7 +67,7 @@ const FRAME_STYLE =
 
 type Message = { type?: string; payload?: unknown };
 
-export interface Paywize {
+export interface PaymentGateway {
   checkout(options: CheckoutOptions): Promise<CheckoutResult>;
   version: string;
   mode: Mode;
@@ -76,14 +76,14 @@ export interface Paywize {
 export const version = '1.0.0';
 
 /**
- * Create a Paywize instance.
+ * Create a payment gateway instance.
  *
- *   const paywize = await load({ mode: 'sandbox' });
- *   await paywize.checkout({ paymentSessionId, redirectTarget: '_modal' });
+ *   const gateway = await load({ mode: 'sandbox' });
+ *   await gateway.checkout({ paymentSessionId, redirectTarget: '_modal' });
  *
  * Returns null on the server, so `import`ing this in Next.js or Remix does not crash.
  */
-export async function load(options: LoadOptions = {}): Promise<Paywize | null> {
+export async function load(options: LoadOptions = {}): Promise<PaymentGateway | null> {
   if (typeof window === 'undefined') return null;
 
   const mode: Mode = options.mode ?? 'sandbox';
@@ -108,7 +108,7 @@ function checkoutUrl(origin: string, opts: CheckoutOptions): string {
 function runCheckout(origin: string, opts: CheckoutOptions): Promise<CheckoutResult> {
   if (!opts?.paymentSessionId) {
     return Promise.reject(
-      new Error('paywize: paymentSessionId is required. Create an order on your server first.'),
+      new Error('payment-gateway-browser-sdk: paymentSessionId is required. Create an order on your server first.'),
     );
   }
 
@@ -138,7 +138,7 @@ function mount(
   return new Promise((resolve) => {
     const frame = document.createElement('iframe');
     frame.src = checkoutUrl(origin, opts);
-    frame.title = 'Paywize secure checkout';
+    frame.title = 'Secure checkout';
     frame.allow = 'payment';
 
     if (container) {
@@ -171,22 +171,22 @@ function mount(
       if (!data || typeof data.type !== 'string') return;
 
       switch (data.type) {
-        case 'paywize:ready':
+        case 'pg:ready':
           frame.contentWindow?.postMessage(
-            { type: 'paywize:init', payload: { parentOrigin: window.location.origin } },
+            { type: 'pg:init', payload: { parentOrigin: window.location.origin } },
             origin,
           );
           break;
-        case 'paywize:resize':
+        case 'pg:resize':
           if (container) {
             const h = (data.payload as { height?: number })?.height;
             if (h) frame.style.height = `${h}px`;
           }
           break;
-        case 'paywize:complete':
+        case 'pg:complete':
           finish(data.payload as CheckoutResult);
           break;
-        case 'paywize:dismiss':
+        case 'pg:dismiss':
           finish({ dismissed: true });
           break;
       }
@@ -194,7 +194,7 @@ function mount(
 
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape' && !container) {
-        frame.contentWindow?.postMessage({ type: 'paywize:request-dismiss' }, origin);
+        frame.contentWindow?.postMessage({ type: 'pg:request-dismiss' }, origin);
       }
     }
 

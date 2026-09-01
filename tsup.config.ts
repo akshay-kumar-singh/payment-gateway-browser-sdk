@@ -10,17 +10,17 @@ export default defineConfig([
     minify: true,
     outExtension: ({ format }) => ({ js: format === 'cjs' ? '.cjs' : '.js' }),
   },
-  // For a plain <script> tag off the CDN. Defines window.Paywize.
+  // For a plain <script> tag off the CDN. Defines window.PaymentGateway.
   {
-    entry: { paywize: 'src/index.ts' },
+    entry: { 'payment-gateway': 'src/index.ts' },
     format: ['iife'],
-    globalName: 'Paywize',
+    globalName: 'PaymentGateway',
     minify: true,
     dts: false,
     outExtension: () => ({ js: '.min.js' }),
     footer: {
-      // Let `Paywize.load(...)` and `Paywize(...)` both work from the global.
-      js: 'if(typeof window!=="undefined"&&window.Paywize&&window.Paywize.load){window.Paywize=Object.assign(window.Paywize.load,window.Paywize);}',
+      // Let `PaymentGateway.load(...)` and `PaymentGateway(...)` both work from the global.
+      js: 'if(typeof window!=="undefined"&&window.PaymentGateway&&window.PaymentGateway.load){window.PaymentGateway=Object.assign(window.PaymentGateway.load,window.PaymentGateway);}',
     },
   },
 ]);

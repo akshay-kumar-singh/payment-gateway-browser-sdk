@@ -1,22 +1,29 @@
 {
   "name": "payment-gateway-browser-sdk",
-  "version": "1.0.0",
-  "description": "Paywize web checkout SDK. Drop it in your page, open the checkout, take payments.",
+  "version": "1.0.1",
+  "description": "Hosted web checkout SDK. Drop it in your page, open the checkout, take payments.",
   "keywords": [
-    "paywize",
     "payments",
     "payment-gateway",
     "checkout",
     "upi",
     "india"
   ],
+  "homepage": "https://payment-gateway-docs.netlify.app/sdk/js",
+  "bugs": {
+    "url": "https://github.com/akshay-kumar-singh/payment-gateway-browser-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshay-kumar-singh/payment-gateway-browser-sdk.git"
+  },
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "unpkg": "./dist/paywize.min.js",
-  "jsdelivr": "./dist/paywize.min.js",
+  "unpkg": "./dist/payment-gateway.min.js",
+  "jsdelivr": "./dist/payment-gateway.min.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
