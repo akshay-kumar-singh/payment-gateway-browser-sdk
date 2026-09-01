@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig([
-  // For bundlers: npm i paywize-dummy-js
+  // For bundlers: npm i payment-gateway-browser-sdk
   {
     entry: { index: 'src/index.ts' },
     format: ['esm', 'cjs'],

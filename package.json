@@ -1,5 +1,5 @@
 {
-  "name": "paywize-dummy-js",
+  "name": "payment-gateway-browser-sdk",
   "version": "1.0.0",
   "description": "Paywize web checkout SDK. Drop it in your page, open the checkout, take payments.",
   "keywords": [

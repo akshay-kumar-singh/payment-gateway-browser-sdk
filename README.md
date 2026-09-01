@@ -1,21 +1,21 @@
-# paywize-dummy-js
+# payment-gateway-browser-sdk
 
 The Paywize web checkout SDK. **1.3 KB gzipped, zero dependencies.**
 
 ```bash
-npm install paywize-dummy-js
+npm install payment-gateway-browser-sdk
 ```
 
 Or via CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/paywize-dummy-js@1/dist/paywize.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/payment-gateway-browser-sdk@1/dist/paywize.min.js"></script>
 ```
 
 ## Usage
 
 ```js
-import { load } from 'paywize-dummy-js';
+import { load } from 'payment-gateway-browser-sdk';
 
 // paymentSessionId comes from YOUR server — see paywize-pg
 const paywize = await load({ mode: 'sandbox' });
