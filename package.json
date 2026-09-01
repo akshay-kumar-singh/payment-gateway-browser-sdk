@@ -1,0 +1,43 @@
+{
+  "name": "paywize-dummy-js",
+  "version": "1.0.0",
+  "description": "Paywize web checkout SDK. Drop it in your page, open the checkout, take payments.",
+  "keywords": [
+    "paywize",
+    "payments",
+    "payment-gateway",
+    "checkout",
+    "upi",
+    "india"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/paywize.min.js",
+  "jsdelivr": "./dist/paywize.min.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
