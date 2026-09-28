@@ -1,6 +1,6 @@
 {
   "name": "payment-gateway-browser-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Hosted web checkout SDK. Drop it in your page, open the checkout, take payments.",
   "keywords": [
     "payments",
